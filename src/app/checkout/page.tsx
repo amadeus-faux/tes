@@ -330,8 +330,8 @@ export default function CheckoutPage() {
     }
 
     try {
-      // 1. Tokenize kartu via Midtrans
-      const tokenUrl = `https://api.sandbox.midtrans.com/v2/token?client_key=${clientKey}&card_number=${rawCardNumber}&card_cvv=${cardForm.cvv}&card_exp_month=${cardForm.expMonth}&card_exp_year=${cardForm.expYear}`;
+      // 1. Obtain Client Token from Midtrans Tokenizer REST API
+      const tokenUrl = `https://api.sandbox.midtrans.com/v2/token?client_key=${clientKey}&card_number=${rawCardNumber}&card_cvv=${cardForm.cvv}&card_exponent_month=${cardForm.expMonth}&card_exponent_year=${cardForm.expYear}`;
 
       const tokenRes = await fetch(tokenUrl, { method: "GET" });
       const tokenData = await tokenRes.json();
@@ -493,13 +493,12 @@ export default function CheckoutPage() {
                   placeholder="EMAIL ADDRESS"
                   value={shippingForm.email}
                   onChange={handleShippingChange}
-                  className={`w-full border-b bg-transparent py-2.5 text-xs tracking-widest uppercase focus:outline-none transition-colors ${
-                    emailError
+                  className={`w-full border-b bg-transparent py-2.5 text-xs tracking-widest uppercase focus:outline-none transition-colors ${emailError
                       ? "border-red-400 focus:border-red-500 text-red-600 placeholder:text-red-300"
                       : shippingForm.email && !emailError
-                      ? "border-emerald-500 focus:border-emerald-600"
-                      : "border-border focus:border-foreground"
-                  }`}
+                        ? "border-emerald-500 focus:border-emerald-600"
+                        : "border-border focus:border-foreground"
+                    }`}
                 />
                 {emailError && shippingForm.email && (
                   <p className="text-[9px] tracking-wider text-red-500 uppercase font-medium flex items-start gap-1">
@@ -530,13 +529,12 @@ export default function CheckoutPage() {
                   maxLength={10}
                   inputMode="numeric"
                   pattern="\d{10}"
-                  className={`w-full border-b bg-transparent py-2.5 text-xs tracking-widest uppercase focus:outline-none transition-colors ${
-                    phoneError
+                  className={`w-full border-b bg-transparent py-2.5 text-xs tracking-widest uppercase focus:outline-none transition-colors ${phoneError
                       ? "border-red-400 focus:border-red-500 text-red-600 placeholder:text-red-300"
                       : shippingForm.phone && !phoneError
-                      ? "border-emerald-500 focus:border-emerald-600"
-                      : "border-border focus:border-foreground"
-                  }`}
+                        ? "border-emerald-500 focus:border-emerald-600"
+                        : "border-border focus:border-foreground"
+                    }`}
                 />
                 {phoneError && shippingForm.phone && (
                   <p className="text-[9px] tracking-wider text-red-500 uppercase font-medium flex items-start gap-1">
@@ -617,11 +615,10 @@ export default function CheckoutPage() {
                     <label
                       key={option.id}
                       htmlFor={`shipping-${option.id}`}
-                      className={`flex items-center gap-4 p-4 border cursor-pointer transition-all duration-200 ${
-                        isSelected
+                      className={`flex items-center gap-4 p-4 border cursor-pointer transition-all duration-200 ${isSelected
                           ? "border-foreground bg-foreground/5"
                           : "border-border hover:border-foreground/40 bg-transparent"
-                      }`}
+                        }`}
                     >
                       <input
                         type="radio"
@@ -635,11 +632,10 @@ export default function CheckoutPage() {
 
                       {/* Icon */}
                       <span
-                        className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${
-                          isSelected
+                        className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${isSelected
                             ? "border-foreground bg-foreground text-background"
                             : "border-border text-muted"
-                        }`}
+                          }`}
                       >
                         {option.icon === "truck" ? (
                           <Truck size={13} />
@@ -651,9 +647,8 @@ export default function CheckoutPage() {
                       {/* Label & Description */}
                       <div className="flex-grow">
                         <p
-                          className={`text-[10px] tracking-widest font-bold uppercase ${
-                            isSelected ? "text-foreground" : "text-muted"
-                          }`}
+                          className={`text-[10px] tracking-widest font-bold uppercase ${isSelected ? "text-foreground" : "text-muted"
+                            }`}
                         >
                           {option.label}
                         </p>
@@ -665,9 +660,8 @@ export default function CheckoutPage() {
                       {/* Price */}
                       <div className="text-right shrink-0">
                         <span
-                          className={`text-xs font-semibold tracking-wider ${
-                            isSelected ? "text-foreground" : "text-muted"
-                          }`}
+                          className={`text-xs font-semibold tracking-wider ${isSelected ? "text-foreground" : "text-muted"
+                            }`}
                         >
                           ${option.rate} {option.currency}
                         </span>
