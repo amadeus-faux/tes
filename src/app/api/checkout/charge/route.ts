@@ -108,12 +108,19 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Charge credit card via Midtrans Core API
+    //    Build the finish URL from the live request host — works on localhost AND Vercel
+    const requestHost = req.headers.get("host") || "localhost:3000";
+    const requestProto = req.headers.get("x-forwarded-proto") || "http";
+    const finishUrl = `${requestProto}://${requestHost}/checkout/payment`;
+    console.log(`[Checkout API] 3DS finish URL: ${finishUrl}`);
+
     let midtransResponse;
     try {
       midtransResponse = await chargeCreditCard({
         tokenId,
         orderNumber,
         amount,
+        finishUrl,
         customer: {
           firstName: shipping.firstName,
           lastName: shipping.lastName,

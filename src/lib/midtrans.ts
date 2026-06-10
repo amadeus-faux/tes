@@ -16,6 +16,7 @@ export interface ChargeCardRequest {
   tokenId: string;
   orderNumber: string;
   amount: number;
+  finishUrl: string; // URL to redirect after 3DS completion
   customer: {
     firstName: string;
     lastName: string;
@@ -49,9 +50,6 @@ export interface ChargeCardResponse {
  * Charges a credit card token via Midtrans Core API
  */
 export async function chargeCreditCard(params: ChargeCardRequest): Promise<ChargeCardResponse> {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const finishRedirectUrl = `${appUrl}/checkout/payment`;
-
   const response = await fetch(`${MIDTRANS_API_URL}/charge`, {
     method: "POST",
     headers: {
@@ -68,7 +66,6 @@ export async function chargeCreditCard(params: ChargeCardRequest): Promise<Charg
       credit_card: {
         token_id: params.tokenId,
         authentication: true, // triggers 3D Secure if applicable
-        callback_type: "js_event",
       },
       customer_details: {
         first_name: params.customer.firstName,
@@ -76,9 +73,10 @@ export async function chargeCreditCard(params: ChargeCardRequest): Promise<Charg
         email: params.customer.email,
         phone: params.customer.phone,
       },
-      // After 3DS authentication, Midtrans redirects back here
+      // Redirect user back to our app after 3DS authentication
+      // finishUrl is derived from the live request host — works in any environment
       callbacks: {
-        finish: finishRedirectUrl,
+        finish: params.finishUrl,
       },
     }),
   });
