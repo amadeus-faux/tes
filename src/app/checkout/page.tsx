@@ -331,7 +331,7 @@ export default function CheckoutPage() {
 
     try {
       // 1. Obtain Client Token from Midtrans Tokenizer REST API
-      const tokenUrl = `https://api.sandbox.midtrans.com/v2/token?client_key=${clientKey}&card_number=${rawCardNumber}&card_cvv=${cardForm.cvv}&card_exponent_month=${cardForm.expMonth}&card_exponent_year=${cardForm.expYear}`;
+      const tokenUrl = `https://api.sandbox.midtrans.com/v2/token?client_key=${clientKey}&card_number=${rawCardNumber}&card_cvv=${cardForm.cvv}&card_exp_month=${cardForm.expMonth}&card_exp_year=${cardForm.expYear}`;
 
       const tokenRes = await fetch(tokenUrl, { method: "GET" });
       const tokenData = await tokenRes.json();
