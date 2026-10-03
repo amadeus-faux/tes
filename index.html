@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Happy Birthday, Alyn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #5F7D42;
+      --text: #F6F4E6;
+      --sheet: #FAF8EE;
+      --sheet-text: #1E2A16;
+      --pill: #ECEBDC;
+      --btn: #141B0E;
+      --line: rgba(30, 42, 22, .16);
+      --cake-bottom: #6F8E4E;
+      --cake-top: #FAF8EE;
+      --cake-line: rgba(30, 42, 22, .28);
+      --smoke: #B9B6A4;
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root {
+        --bg: #2B3A1D;
+        --sheet: #EDEADC;
+        --pill: #D9D6C2;
+        --cake-line: rgba(30, 42, 22, .4);
+        --smoke: #CFCCBA;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      scrollbar-width: none
+    }
+
+    html::-webkit-scrollbar {
+      width: 0;
+      height: 0
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Figtree', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 3px;
+      border-radius: 4px
+    }
+
+    .sheet :focus-visible,
+    .close-btn:focus-visible {
+      outline-color: var(--sheet-text)
+    }
+
+    .close-btn:focus-visible {
+      outline-color: var(--text)
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: calc(env(safe-area-inset-top) + 14px) 16px 26px;
+      background: linear-gradient(to bottom, var(--bg) 55%, transparent);
+      pointer-events: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    /* Feed */
+    .feed {
+      max-width: 500px;
+      margin: 0 auto;
+      display: grid;
+      gap: 12px;
+      padding: calc(env(safe-area-inset-top) + 76px) 10px calc(env(safe-area-inset-bottom) + 110px);
+      will-change: transform;
+    }
+
+    .card {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 1.6;
+      overflow: hidden;
+      border: 0;
+      border-radius: 22px;
+      padding: 0;
+      cursor: pointer;
+      text-align: left;
+      background: none;
+      color: inherit;
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card-media {
+      position: absolute;
+      inset: -12% 0;
+      will-change: transform;
+    }
+
+    .card-media .sun {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .card-media .word {
+      position: absolute;
+      left: 22px;
+      top: 16%;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(42px, 14vw, 60px);
+      line-height: 1;
+      color: var(--text);
+      opacity: .92;
+    }
+
+    .theme-1 {
+      background: linear-gradient(150deg, #8CA95F 0%, #5F7D42 45%, #39512A 100%)
+    }
+
+    .theme-1 .sun {
+      width: 110px;
+      height: 110px;
+      right: 14%;
+      bottom: 24%;
+      background: radial-gradient(circle at 35% 35%, #FBF7E4, #E4DFBB 70%);
+      opacity: .9
+    }
+
+    .theme-2 {
+      background: linear-gradient(160deg, #A7BE7C 0%, #6E8C4C 55%, #41592D 100%)
+    }
+
+    .theme-2 .sun {
+      width: 64px;
+      height: 64px;
+      right: 16%;
+      top: 22%;
+      background: #F0EDD2;
+      opacity: .85;
+      box-shadow: -70px 40px 0 -18px #F0EDD2aa, -34px 84px 0 -24px #F0EDD288
+    }
+
+    .theme-3 {
+      background: linear-gradient(140deg, #C3CE9A 0%, #7D9556 50%, #3E5A2A 100%)
+    }
+
+    .theme-3 .sun {
+      width: 150px;
+      height: 150px;
+      left: -40px;
+      bottom: -30px;
+      background: radial-gradient(circle at 40% 30%, #FAF8EEcc, #FAF8EE33 70%)
+    }
+
+    .theme-4 {
+      background: linear-gradient(165deg, #4E6B36 0%, #33492404 40%, #22331A 100%), linear-gradient(#3B5429, #22331A)
+    }
+
+    .theme-4 .sun {
+      width: 14px;
+      height: 14px;
+      right: 20%;
+      top: 20%;
+      background: #F6F4E6;
+      opacity: .9;
+      box-shadow: -46px 30px 0 -3px #F6F4E6aa, 34px 52px 0 -4px #F6F4E688, -18px 88px 0 -2px #F6F4E6cc, 58px 14px 0 -5px #F6F4E677
+    }
+
+    .card-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8, 12, 5, .62) 0%, rgba(8, 12, 5, .2) 30%, transparent 55%);
+    }
+
+    .card-title {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--btn);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+    }
+
+    /* Bottom bar */
+    .bottombar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      padding: 30px 16px calc(env(safe-area-inset-bottom) + 18px);
+      background: linear-gradient(to top, var(--bg) 45%, transparent);
+      pointer-events: none;
+    }
+
+    .wishes-open {
+      pointer-events: auto;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      font: 700 13px/1 'Figtree', system-ui, sans-serif;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text);
+      padding: 10px 6px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Overlay + sheet */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 15;
+      background: rgba(10, 14, 7, .55);
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .sheet {
+      position: fixed;
+      z-index: 20;
+      top: 14px;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      margin-inline: auto;
+      max-width: 500px;
+      background: var(--sheet);
+      color: var(--sheet-text);
+      border-radius: 22px;
+      padding: 30px 22px calc(env(safe-area-inset-bottom) + 30px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      visibility: hidden;
+      touch-action: pan-y;
+    }
+
+    .sheet-title {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -.01em
+    }
+
+    .sheet-desc {
+      font-size: 16px;
+      line-height: 1.55;
+      opacity: .82;
+      margin-top: 10px
+    }
+
+    .pill-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px
+    }
+
+    .pill-arrow {
+      width: 34px;
+      height: 34px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--btn);
+      color: var(--text);
+      border: 0;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 34px;
+      padding: 0 16px;
+      background: var(--pill);
+      color: var(--sheet-text);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .preview-img {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 12px;
+      aspect-ratio: 16/9;
+      background: var(--pill);
+    }
+
+    .preview-img svg {
+      display: block;
+      width: 100%;
+      height: 100%
+    }
+
+    .feed-hint {
+      position: fixed;
+      z-index: 4;
+      pointer-events: none;
+      left: calc(12px + env(safe-area-inset-left));
+      bottom: calc(env(safe-area-inset-bottom) + 14px);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: var(--text);
+      opacity: .7;
+    }
+
+    /* Wishes form */
+    .wish-form {
+      margin-top: 20px
+    }
+
+    .wish-form textarea {
+      width: 100%;
+      min-height: 130px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .55);
+      padding: 13px 14px;
+      font: 400 15px/1.5 'Figtree', system-ui, sans-serif;
+      color: var(--sheet-text);
+    }
+
+    .wish-form textarea::placeholder {
+      color: var(--sheet-text);
+      opacity: .4
+    }
+
+    .send-btn {
+      margin-top: 12px;
+      width: 100%;
+      height: 48px;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      background: var(--btn);
+      color: var(--text);
+      font: 700 13px/1 'Figtree', system-ui, sans-serif;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .wish-msg {
+      min-height: 20px;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center
+    }
+
+    .wish-msg.error {
+      color: #B3402B
+    }
+
+    .wish-msg.ok {
+      color: #3E5A2A
+    }
+
+    /* Candle cake stage */
+    .wish-stage {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 26px 0 6px
+    }
+
+    .cake-wrap {
+      width: 180px
+    }
+
+    .cake-wrap svg {
+      display: block;
+      width: 100%;
+      height: auto
+    }
+
+    .make-wish {
+      margin-top: 10px;
+      opacity: 0;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 19px;
+    }
+
+    .thank-block {
+      display: none;
+      text-align: center
+    }
+
+    .thank-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    .thank-sub {
+      margin-top: 8px;
+      font-size: 13px;
+      opacity: .7
+    }
+
+    /* Close button */
+    .close-btn {
+      position: fixed;
+      z-index: 25;
+      right: calc(18px + env(safe-area-inset-right));
+      bottom: calc(18px + env(safe-area-inset-bottom));
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--btn);
+      color: var(--text);
+      border: 0;
+      cursor: pointer;
+      font-size: 20px;
+      display: grid;
+      place-items: center;
+      visibility: hidden;
+      opacity: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Neighbor-sheet edge strips */
+    .edge-strip {
+      position: fixed;
+      top: 22px;
+      bottom: 18px;
+      width: 7px;
+      z-index: 18;
+      background: rgba(255, 255, 255, .28);
+      border: 0;
+      border-radius: 6px;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .strip-prev {
+      left: max(2px, calc(50% - 258px))
+    }
+
+    .strip-next {
+      right: max(2px, calc(50% - 258px))
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header" aria-hidden="true">
+    <span>Happy Birthday</span>
+    <span id="headerName">Alyn</span>
+  </header>
+
+  <main class="feed" id="feed"></main>
+
+  <nav class="bottombar">
+    <button type="button" class="wishes-open" id="wishesOpen">Send your wishes</button>
+  </nav>
+
+  <span class="feed-hint" id="feedHint" aria-hidden="true">klik gambar!</span>
+
+  <div class="overlay" id="overlay"></div>
+
+  <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Birthday message" tabindex="-1">
+    <div id="sheetBody"></div>
+  </section>
+
+  <button type="button" class="close-btn" id="closeBtn" aria-label="Close">&#10005;</button>
+
+  <button type="button" class="edge-strip strip-prev" id="stripPrev" aria-label="Previous"></button>
+  <button type="button" class="edge-strip strip-next" id="stripNext" aria-label="Next"></button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // All content lives here. Edit freely.
+    const NAME = 'Alyn';
+    const CARDS = [
+      {
+        title: 'Matcha Morning',
+        word: 'morning',
+        desc: 'Happy birthday, ' + NAME + '. May your day start slow and warm, like the first sip of matcha in the morning. Today the cup is full and the day is yours.',
+        previews: [
+          { alt: 'Morning hills under a pale sun', sky: '#E9E4C8', sun: '#FBF7E4', sx: 230, sy: 58, sr: 26, c1: '#8CA95F', h1: 68, c2: '#5F7D42', h2: 100 },
+          { alt: 'Soft green valley at dawn', sky: '#DCE3BC', sun: '#F6F4E6', sx: 88, sy: 46, sr: 18, c1: '#6E8C4C', h1: 60, c2: '#39512A', h2: 96 }
+        ]
+      },
+      {
+        title: 'From Your Friends',
+        word: 'friends',
+        desc: 'Your friends wrote this one for you. We are lucky to know you, and today is entirely yours. Happy birthday, ' + NAME + '.',
+        previews: [
+          { alt: 'Two hills and a low sun', sky: '#F0EDD2', sun: '#E4DFBB', sx: 62, sy: 52, sr: 22, c1: '#A7BE7C', h1: 64, c2: '#41592D', h2: 100 },
+          { alt: 'Open field in the afternoon', sky: '#E4E7C4', sun: '#F6F4E6', sx: 252, sy: 44, sr: 16, c1: '#7D9556', h1: 74, c2: '#33492A', h2: 104 }
+        ]
+      },
+      {
+        title: 'From Your Family',
+        word: 'family',
+        desc: 'From all of us at home: happy birthday, ' + NAME + '. We are proud of you, today and every other day.',
+        previews: [
+          { alt: 'Warm hills around home', sky: '#F4EFD6', sun: '#EFE6B8', sx: 160, sy: 50, sr: 30, c1: '#C3CE9A', h1: 66, c2: '#3E5A2A', h2: 98 },
+          { alt: 'Quiet slope in the evening', sky: '#E7E9C9', sun: '#FAF8EE', sx: 72, sy: 60, sr: 20, c1: '#8CA95F', h1: 78, c2: '#2B3A1D', h2: 106 }
+        ]
+      },
+      {
+        title: 'Wishes For You',
+        word: 'wishes',
+        desc: 'Make a wish, ' + NAME + '. Whatever you are hoping for this year, we hope it finds you soon.',
+        previews: [
+          { alt: 'Night hills under a small moon', sky: '#22331A', sun: '#F6F4E6', sx: 240, sy: 46, sr: 14, c1: '#3B5429', h1: 70, c2: '#16220F', h2: 100 },
+          { alt: 'Dark valley with a rising moon', sky: '#2E4222', sun: '#EDEADC', sx: 100, sy: 40, sr: 12, c1: '#4E6B36', h1: 62, c2: '#1B2A12', h2: 96 }
+        ]
+      }
+    ];
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dur = d => reduceMotion ? Math.min(d, 0.25) : d;
+
+    document.getElementById('headerName').textContent = NAME;
+    document.title = 'Happy Birthday, ' + NAME;
+
+    const feed = document.getElementById('feed');
+    const overlay = document.getElementById('overlay');
+    const sheet = document.getElementById('sheet');
+    const sheetBody = document.getElementById('sheetBody');
+    const closeBtn = document.getElementById('closeBtn');
+    const strips = [document.getElementById('stripPrev'), document.getElementById('stripNext')];
+    const feedHint = document.getElementById('feedHint');
+
+    // ---- Render cards (4 sets for the infinite loop) ----
+    const SETS = 4;
+    const cardEls = [];
+    for (let s = 0; s < SETS; s++) {
+      CARDS.forEach((c, i) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'card';
+        card.dataset.set = s;
+        card.dataset.index = i;
+        card.setAttribute('aria-label', c.title + ', open message');
+        card.innerHTML =
+          '<span class="card-media theme-' + (i + 1) + '" aria-hidden="true">' +
+          '<span class="sun"></span>' +
+          '<span class="word">' + c.word + '</span>' +
+          '</span>' +
+          '<span class="card-shade" aria-hidden="true"></span>' +
+          '<span class="card-title">' + c.title + '</span>' +
+          '<span class="card-arrow" aria-hidden="true">&#8594;</span>';
+        card.addEventListener('click', () => { showDetail(i); openSheet(); });
+        feed.appendChild(card);
+        cardEls.push(card);
+      });
+    }
+
+    // ---- Sheet content ----
+    let cur = -1;
+
+    // Inline SVG landscape: sky, sun/moon, two hill layers. No external images.
+    function landscapeSVG(s) {
+      return '<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + s.alt + '">' +
+        '<rect width="320" height="180" fill="' + s.sky + '"/>' +
+        '<circle cx="' + s.sx + '" cy="' + s.sy + '" r="' + s.sr + '" fill="' + s.sun + '"/>' +
+        '<path d="M0 118 Q80 ' + s.h1 + ' 160 116 T320 110 V180 H0 Z" fill="' + s.c1 + '"/>' +
+        '<path d="M0 148 Q110 ' + s.h2 + ' 220 146 T320 142 V180 H0 Z" fill="' + s.c2 + '"/>' +
+        '</svg>';
+    }
+
+    function showDetail(i) {
+      cur = i;
+      const c = CARDS[i];
+      const num = String(i + 1).padStart(2, '0');
+      sheetBody.innerHTML =
+        '<h2 class="sheet-title sheet-child">' + c.title + '</h2>' +
+        '<p class="sheet-desc sheet-child">' + c.desc + '</p>' +
+        '<div class="pill-row sheet-child">' +
+        '<button type="button" class="pill-arrow" id="nextCard" aria-label="Next card">&#8594;</button>' +
+        '<span class="pill">' + num + ' / ' + String(CARDS.length).padStart(2, '0') + ' &middot; ' + c.title + '</span>' +
+        '</div>' +
+        c.previews.map(p =>
+          '<div class="preview-img sheet-child">' + landscapeSVG(p) + '</div>').join('');
+      sheet.scrollTop = 0;
+      document.getElementById('nextCard').addEventListener('click', () => go(1));
+    }
+
+    function showWishes() {
+      cleanupWish(true);
+      sheetBody.innerHTML =
+        '<h2 class="sheet-title sheet-child">Send Your Wishes</h2>' +
+        '<p class="sheet-desc sheet-child">Write a birthday wish ' + NAME + '!</p>' +
+        '<div class="wish-form sheet-child">' +
+        '<textarea id="wishText" aria-label="Your wish" placeholder="Write your wish here..."></textarea>' +
+        '<button type="button" class="send-btn" id="wishSend">Send</button>' +
+        '<p class="wish-msg" id="wishMsg" role="status"></p>' +
+        '</div>';
+      sheet.scrollTop = 0;
+      document.getElementById('wishSend').addEventListener('click', sendWish);
+    }
+
+    const CAKE_SVG =
+      '<div class="cake-wrap" aria-hidden="true"><svg viewBox="0 0 200 220">' +
+      '<defs>' +
+      '<radialGradient id="flameGrad" cx="50%" cy="42%" r="60%">' +
+      '<stop offset="0%" stop-color="#FFE9A3"/><stop offset="100%" stop-color="#F5A524"/>' +
+      '</radialGradient>' +
+      '<radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">' +
+      '<stop offset="0%" stop-color="rgba(255,233,163,.55)"/><stop offset="100%" stop-color="rgba(255,233,163,0)"/>' +
+      '</radialGradient>' +
+      '<clipPath id="candleClip"><rect x="95" y="68" width="10" height="44" rx="3"/></clipPath>' +
+      '</defs>' +
+      '<ellipse cx="100" cy="206" rx="54" ry="7" fill="var(--sheet-text)" opacity=".12"/>' +
+      '<ellipse cx="100" cy="198" rx="60" ry="9" fill="var(--pill)" stroke="var(--cake-line)" stroke-width="1"/>' +
+      '<rect x="52" y="150" width="96" height="44" rx="10" fill="var(--cake-bottom)"/>' +
+      '<rect x="64" y="112" width="72" height="42" rx="10" fill="var(--cake-top)" stroke="var(--cake-line)" stroke-width="1"/>' +
+      '<path d="M64 120 q6 -14 12 0 q6 -14 12 0 q6 -14 12 0 q6 -14 12 0 q6 -14 12 0 q6 -14 12 0 v-8 h-72 z" fill="var(--cake-top)" stroke="var(--cake-line)" stroke-width="1"/>' +
+      '<g class="candle-g">' +
+      '<rect x="95" y="68" width="10" height="44" rx="3" fill="var(--cake-top)" stroke="var(--cake-line)" stroke-width="1"/>' +
+      '<g clip-path="url(#candleClip)"><path d="M93 80 l14 -8 M93 92 l14 -8 M93 104 l14 -8" stroke="var(--cake-bottom)" stroke-width="2.5"/></g>' +
+      '<rect x="99" y="61" width="2" height="8" rx="1" fill="var(--sheet-text)"/>' +
+      '</g>' +
+      '<circle class="glow" cx="100" cy="48" r="26" fill="url(#glowGrad)"/>' +
+      '<g class="flame-g">' +
+      '<path d="M100 30 c8 10 11 17 11 23 a11 11 0 0 1 -22 0 c0 -6 3 -13 11 -23 z" fill="url(#flameGrad)"/>' +
+      '<ellipse cx="100" cy="50" rx="4.5" ry="6.5" fill="#FFF6D8" opacity=".9"/>' +
+      '</g>' +
+      '<g stroke="var(--smoke)" stroke-width="2" fill="none" stroke-linecap="round">' +
+      '<path class="smoke" d="M96 58 q-4 -8 0 -14 q4 -6 0 -12"/>' +
+      '<path class="smoke" d="M100 56 q4 -8 0 -14 q-4 -6 0 -12"/>' +
+      '<path class="smoke" d="M104 58 q-4 -8 0 -14 q4 -6 0 -12"/>' +
+      '</g>' +
+      '</svg></div>';
+
+    let candleTL = null;
+    let wishCloseCall = null;
+    let flickerTweens = [];
+    let wishAnim = false;
+
+    function cleanupWish(removeStage) {
+      if (candleTL) { candleTL.kill(); candleTL = null; }
+      if (wishCloseCall) { wishCloseCall.kill(); wishCloseCall = null; }
+      flickerTweens.forEach(t => t.kill());
+      flickerTweens = [];
+      wishAnim = false;
+      if (removeStage) {
+        const st = document.getElementById('wishStage');
+        if (st) st.remove();
+      }
+    }
+
+    function sendWish() {
+      if (wishAnim) return;
+      const ta = document.getElementById('wishText');
+      const msg = document.getElementById('wishMsg');
+      const value = ta.value.trim();
+      if (!value) {
+        msg.className = 'wish-msg error';
+        msg.textContent = 'Write a wish first.';
+        ta.focus();
+        return;
+      }
+      wishAnim = true;
+      ta.disabled = true;
+      document.getElementById('wishSend').disabled = true;
+      const text = 'Happy Birthday, ' + NAME + '! ' + value;
+      // Fire and forget: the candle plays even if the share sheet is dismissed.
+      const deliver = navigator.share ? navigator.share({ text })
+        : (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.resolve());
+      Promise.resolve(deliver).catch(() => { });
+      playCandle();
+    }
+
+    function playCandle() {
+      const form = document.querySelector('.wish-form');
+      const stage = document.createElement('div');
+      stage.id = 'wishStage';
+      stage.className = 'wish-stage';
+      stage.innerHTML = CAKE_SVG +
+        '<div class="make-wish">Make a wish</div>' +
+        '<div class="thank-block">' +
+        '<p class="thank-title" role="status" aria-live="polite">Thank you!</p>' +
+        '<p class="thank-sub">Your wish is on its way to the stars.</p>' +
+        '</div>';
+      form.after(stage);
+
+      const thank = stage.querySelector('.thank-block');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(form, { display: 'none' });
+        gsap.set(stage, { display: 'flex' });
+        gsap.set([stage.querySelector('.cake-wrap'), stage.querySelector('.make-wish')], { display: 'none' });
+        gsap.set(thank, { display: 'block' });
+        gsap.fromTo(thank, { opacity: 0 }, { opacity: 1, duration: 0.2 });
+        wishCloseCall = gsap.delayedCall(1.5, closeSheet);
+        return;
+      }
+      buildCakeTL(form, stage);
+    }
+
+    function buildCakeTL(form, stage) {
+      const cake = stage.querySelector('.cake-wrap');
+      const candle = stage.querySelector('.candle-g');
+      const flame = stage.querySelector('.flame-g');
+      const glow = stage.querySelector('.glow');
+      const smokes = stage.querySelectorAll('.smoke');
+      const makeW = stage.querySelector('.make-wish');
+      const thank = stage.querySelector('.thank-block');
+
+      gsap.set(stage, { display: 'flex' });
+      gsap.set([candle, flame], { transformOrigin: '50% 100%' });
+      gsap.set(candle, { scaleY: 0 });
+      gsap.set(flame, { scale: 0 });
+      gsap.set(glow, { opacity: 0 });
+      gsap.set(smokes, { opacity: 0 });
+
+      candleTL = gsap.timeline();
+      candleTL
+        .to(form, {
+          scale: 0.9, opacity: 0, y: -10, duration: 0.4, ease: 'power2.in',
+          onComplete: () => gsap.set(form, { display: 'none' })
+        })
+        .from(cake, { y: 40, opacity: 0, scale: 0.8, duration: 0.6, ease: 'back.out(1.6)' })
+        .to(candle, { scaleY: 1, duration: 0.35, ease: 'power2.out' })
+        .to(flame, { scale: 1, duration: 0.4, ease: 'elastic.out(1, .5)' })
+        .add(() => {
+          gsap.set(flame, { rotation: -4, scaleY: 0.92 });
+          flickerTweens.push(
+            gsap.to(flame, {
+              rotation: 4, scaleY: 1.08, duration: () => gsap.utils.random(0.18, 0.3),
+              ease: 'sine.inOut', repeat: -1, yoyo: true, repeatRefresh: true
+            }),
+            gsap.fromTo(glow, { opacity: 0.35 }, {
+              opacity: 0.6, duration: () => gsap.utils.random(0.18, 0.3),
+              ease: 'sine.inOut', repeat: -1, yoyo: true, repeatRefresh: true
+            })
+          );
+        })
+        .to(makeW, { opacity: 1, duration: 0.5, ease: 'power1.inOut' })
+        .to({}, { duration: 1.4 })
+        .add(() => {
+          flickerTweens.forEach(t => t.kill());
+          flickerTweens = [];
+        })
+        .to(flame, { scaleY: 0, scaleX: 0.6, opacity: 0, duration: 0.25, ease: 'power2.in' })
+        .to(glow, { opacity: 0, duration: 0.25 }, '<')
+        .addLabel('smokeStart', '+=0.05')
+        .fromTo(smokes, { y: 0, opacity: 0.6 },
+          { y: -50, x: i => (i % 2 ? 8 : -8), opacity: 0, duration: 1.2, stagger: 0.12, ease: 'power1.out' },
+          'smokeStart')
+        .to([cake, makeW], { opacity: 0, y: -8, duration: 0.4, ease: 'power2.in' }, 'smokeStart+=0.7')
+        .set(thank, { display: 'block' }, 'smokeStart+=1.1')
+        .fromTo(thank, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.8)' }, 'smokeStart+=1.1')
+        .to({}, { duration: 1.5 })
+        .call(closeSheet);
+    }
+
+    // ---- Open / close ----
+    let openTL = null;
+    let isOpen = false;
+    let busy = false;
+    let lastFocus = null;
+
+    function animChildren() {
+      gsap.fromTo(sheetBody.querySelectorAll('.sheet-child'),
+        { y: 26, opacity: 0 },
+        { y: 0, opacity: 1, duration: dur(0.5), stagger: reduceMotion ? 0 : 0.07, ease: 'power2.out', clearProps: 'transform,opacity' });
+    }
+
+    function openSheet() {
+      if (busy) return;
+      busy = true;
+      lastFocus = document.activeElement;
+      overlay.style.visibility = 'visible';
+      sheet.style.visibility = 'visible';
+      closeBtn.style.visibility = 'visible';
+      feedHint.style.visibility = 'hidden';
+      if (cur >= 0) gsap.to(strips, { autoAlpha: 1, duration: dur(0.3), delay: reduceMotion ? 0 : 0.25 });
+      else gsap.set(strips, { autoAlpha: 0 });
+      if (openTL) openTL.kill();
+      openTL = gsap.timeline({ onComplete: () => { busy = false; sheet.focus(); } });
+      openTL
+        .to(overlay, { opacity: 1, duration: dur(0.4) }, 0)
+        .to(feed, { scale: 0.94, transformOrigin: '50% 0%', duration: dur(0.75), ease: 'expo.out' }, 0)
+        .fromTo(sheet, { yPercent: 110 }, { yPercent: 0, duration: dur(0.75), ease: 'expo.out' }, 0)
+        .fromTo(closeBtn, { scale: 0, opacity: 1 }, { scale: 1, duration: dur(0.5), ease: 'back.out(2)' }, reduceMotion ? 0 : 0.3);
+      animChildren();
+      isOpen = true;
+    }
+
+    function closeSheet() {
+      if (!isOpen || busy) return;
+      isOpen = false;
+      busy = true;
+      if (openTL) openTL.kill();
+      cleanupWish(false);
+      const tl = gsap.timeline({
+        onComplete: () => {
+          sheet.style.visibility = 'hidden';
+          overlay.style.visibility = 'hidden';
+          closeBtn.style.visibility = 'hidden';
+          const st = document.getElementById('wishStage');
+          if (st) st.remove();
+          gsap.set(feed, { scale: 1 });
+          gsap.set(closeBtn, { scale: 1 });
+          gsap.set(sheet, { x: 0, scale: 1, opacity: 1 });
+          gsap.set(strips, { autoAlpha: 0 });
+          feedHint.style.visibility = 'visible';
+          busy = false;
+          if (lastFocus) lastFocus.focus();
+        }
+      });
+      tl.to(sheet, { yPercent: 110, duration: dur(0.55), ease: 'power3.inOut' }, 0)
+        .to(overlay, { opacity: 0, duration: dur(0.55), ease: 'power3.inOut' }, 0)
+        .to(closeBtn, { scale: 0, duration: dur(0.4), ease: 'power3.inOut' }, 0)
+        .to(feed, { scale: 1, duration: dur(0.55), ease: 'power3.inOut' }, 0);
+    }
+
+    closeBtn.addEventListener('click', closeSheet);
+    overlay.addEventListener('click', closeSheet);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeSheet();
+      else if (e.key === 'ArrowRight') go(1);
+      else if (e.key === 'ArrowLeft') go(-1);
+    });
+    document.getElementById('wishesOpen').addEventListener('click', () => { cur = -1; showWishes(); openSheet(); });
+
+    // ---- Card-to-card navigation ----
+    // Feel of the transition lives here: durations in seconds, slide distance in px.
+    const NAV = {
+      exitDur: 0.28, enterDur: 0.42, childDur: 0.45,
+      childStagger: 0.07, childDelay: 0.12,
+      distFactor: 0.14, distMax: 70,
+      swipeMin: 60, swipeRatio: 1.4
+    };
+
+    function go(dir) {
+      if (busy || cur < 0) return;
+      busy = true;
+      const d = reduceMotion ? 0 : Math.min(window.innerWidth * NAV.distFactor, NAV.distMax);
+      const target = (cur + dir + CARDS.length) % CARDS.length;
+      const tl = gsap.timeline({ onComplete: () => { busy = false; } });
+      tl.to(sheet, { x: -dir * d, opacity: 0.12, scale: 0.985, duration: reduceMotion ? 0.2 : NAV.exitDur, ease: 'power2.in' })
+        .add(() => {
+          showDetail(target);
+          gsap.set(sheet, { x: dir * d });
+          const enter = gsap.timeline();
+          enter
+            .to(sheet, { x: 0, opacity: 1, scale: 1, duration: reduceMotion ? 0.2 : NAV.enterDur, ease: 'power3.out' }, 0)
+            .from(sheetBody.querySelectorAll('.sheet-child'),
+              {
+                y: reduceMotion ? 0 : 14, opacity: 0, stagger: reduceMotion ? 0 : NAV.childStagger,
+                duration: reduceMotion ? 0.2 : NAV.childDur, ease: 'power3.out', clearProps: 'transform,opacity'
+              },
+              reduceMotion ? 0 : NAV.childDelay);
+          tl.add(enter);
+        });
+    }
+
+    strips[0].addEventListener('click', () => go(-1));
+    strips[1].addEventListener('click', () => go(1));
+
+    let touchX = 0, touchY = 0;
+    sheet.addEventListener('touchstart', e => {
+      touchX = e.changedTouches[0].clientX;
+      touchY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    sheet.addEventListener('touchend', e => {
+      if (cur < 0) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      const dy = e.changedTouches[0].clientY - touchY;
+      if (Math.abs(dx) > NAV.swipeMin && Math.abs(dx) > Math.abs(dy) * NAV.swipeRatio) go(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    // ---- Intro + parallax ----
+    gsap.from('.card[data-set="1"]', { y: 70, opacity: 0, stagger: 0.12, duration: dur(1), ease: 'power3.out' });
+
+    if (!reduceMotion) {
+      cardEls.forEach(card => {
+        gsap.fromTo(card.querySelector('.card-media'),
+          { yPercent: -7 },
+          {
+            yPercent: 7, ease: 'none',
+            scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true }
+          });
+      });
+    }
+
+    // ---- Infinite scroll loop ----
+    // The feed repeats 4 identical sets; scroll position is wrapped modulo one set
+    // so the feed never hits a top or bottom edge.
+    history.scrollRestoration = 'manual';
+    const docTop = el => el.getBoundingClientRect().top + window.scrollY;
+    let setH = 0, loopBase = 0;
+    function measureLoop() {
+      setH = docTop(cardEls[CARDS.length]) - docTop(cardEls[0]);
+      loopBase = setH;
+    }
+    measureLoop();
+    window.scrollTo(0, loopBase);
+    ScrollTrigger.refresh();
+    window.addEventListener('resize', () => { measureLoop(); ScrollTrigger.refresh(); });
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y >= loopBase + setH) window.scrollTo(0, y - setH);
+      else if (y < loopBase) window.scrollTo(0, y + setH);
+    }, { passive: true });
+  </script>
+</body>
+
+</html>
