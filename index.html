@@ -311,7 +311,7 @@
     let tk = 0;
     let script = [
       Nr('Senja di tepi rawa. Nyla udah berdiri di sana sejak tadi, menatap matahari yang pelan pelan turun.'),
-      S(Y, 'Kamu ga bales pesanku tiga hari.'),
+      S(Y, 'Kamu ga bales pesanku dua minggu.'),
       S(N, 'Aku sibuk.'),
       S(Y, 'Bohong.'),
       S(N, '...'),
@@ -332,19 +332,19 @@
       S(Y, 'Aku ga mau yang gampang.'),
       S(Y, 'Aku mau kamu.'),
       Nr('Untuk sesaat Nyla tidak menjawab. Lalu bahunya mulai bergetar.', { bg: 'night', nyla: 'cry' }),
-      S(N, 'Aku capek, Yer.', { slow: 1 }),
-      S(N, 'Aku capek pura pura kuat. Capek bilang "aku baik-baik aja" padahal tiap malam aku ga yakin besok bisa bangun dengan perasaan yang sama.', { slow: 1 }),
+      S(N, 'Aku cape, Yer.', { slow: 1 }),
+      S(N, 'Aku cape pura pura kuat. Cape bilang "aku baik baik aja" padahal tiap malem aku ga yakin besok bisa bangun dengan perasaan yang sama.', { slow: 1 }),
       S(N, 'Tiap kali kamu baik sama aku, yang kupikirin cuma satu: kapan ini habis?', { slow: 1 }),
-      S(N, 'Jadi aku belajar jalan sendirian. Biar kalau semua orang pergi, aku ga kaget.', { slow: 1 }),
+      S(N, 'Jadi aku belajar jalan sendirian. Biar kalo semua orang pergi, aku ga kaget.', { slow: 1 }),
       S(Y, 'Kamu ga perlu belajar itu lagi.'),
       S(N, 'Kamu ga ngerti...', { slow: 1 }),
       S(Y, 'Mungkin belom semuanya. Tapi aku mau belajar.'),
       S(Y, 'Dengar, Nyla. Kamu ga harus pantes dulu supaya boleh dicintai. Cinta bukan hadiah buat orang yang sudah beres.'),
       S(Y, 'Aku ga minta kamu baik baik aja. Aku cuma minta, jangan usir aku pas kamu lagi ga baik baik aja.'),
       S(N, 'Kalo aku ga sembuh sembuh?', { slow: 1 }),
-      S(Y, 'Aku tetap di sini.', { fast: 1 }),
-      S(N, 'Kalo aku ga pernah jadi orang yang kamu bayangkan?', { slow: 1 }),
-      S(Y, 'Aku ga jatuh cinta sama bayangan. Aku jatuh cinta sama kamu. Yang ngerasa ga pantes, yang overthinking, yang pura pura ga butuh siapa siapa.'),
+      S(Y, 'Aku tetep di sini.', { fast: 1 }),
+      S(N, 'Kalo aku ga pernah jadi orang yang kamu bayangin?', { slow: 1 }),
+      S(Y, 'Aku ga jatuh cinta sama bayangan. Aku jatuh cinta sama kamu. Yang selalu ngerasa ga pantes, yang overthinking, yang pura pura ga butuh siapa siapa.'),
       S(Y, 'Apa pun yang terjadi, besok, bulan depan, bagaimanapun hasilnya nanti, aku di sini.', { fast: 1 }),
       {
         choice: [
@@ -355,10 +355,10 @@
       S(N, 'Aku masih takut.', { slow: 1 }),
       S(Y, 'Boleh. Takut aja di sini, sama aku.'),
       S(N, 'Maaf... aku udah sering banget nyuruh kamu pergi.', { slow: 1 }),
-      S(Y, 'Ga apa apa. Aku juga sering banget ga pergi.'),
+      S(Y, 'Gapaapa. Aku juga sering banget ga pergi.'),
       S(N, '...Makasih.', { slow: 1 }),
-      S(Y, 'Kamu ga perlu berterima kasih untuk hal yang memang mau aku lakukan.'),
-      Nr('Langit sudah sepenuhnya gelap. Di antara rerumputan, kunang-kunang mulai menyala satu per satu.', { shade: 1 }),
+      S(Y, 'Kamu ga perlu berterima kasih untuk hal yang memang mau aku lakuin.'),
+      Nr('Langit sudah sepenuhnya gelap. Di antara rerumputan, kunang kunang mulai menyala satu per satu.', { shade: 1 }),
       { end: 1 }];
     let q, i, typing = null, full = '', cur;
     const box = $('box'), who = $('who'), txt = $('txt'), ch = $('ch'), nx = $('next');
